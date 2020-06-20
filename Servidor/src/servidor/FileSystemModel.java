@@ -6,6 +6,7 @@
 package servidor;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Vector;
 import javax.swing.event.TreeModelEvent;
@@ -17,7 +18,7 @@ import javax.swing.tree.TreePath;
  *
  * @author daniel
  */
-public class FileSystemModel implements TreeModel {
+public class FileSystemModel implements TreeModel, Serializable{
 private File root;
 private Vector listeners = new Vector();
 

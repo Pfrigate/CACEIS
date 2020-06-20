@@ -13,44 +13,56 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import javax.swing.JTree;
+import javax.swing.tree.TreeModel;
 
 
-public class Servidor extends Conexion //Se hereda de conexión para hacer uso de los sockets y demás
-{
-    public Servidor() throws IOException{super("servidor");} //Se usa el constructor para servidor de Conexion
 
+public class Servidor{
+    int port=6969;
+    TreeModel ARBOL;
+    public Servidor() {
+    
+    } //Se usa el constructor para servidor de Conexion
+    public void setModelo(TreeModel a1){
+        ARBOL=a1;
+    }
+    public TreeModel getModelo(TreeModel a1){
+       return ARBOL;
+    }
+        
     public void startServer()//Método para iniciar el servidor
     {
-        try
-        {
-            System.out.println("Esperando..."); //Esperando conexión
-
-            cs = ss.accept(); //Accept comienza el socket y espera una conexión desde un cliente
-
-            System.out.println("Cliente en línea");
-
-            //Se obtiene el flujo de salida del cliente para enviarle mensajes
-            salidaCliente = new DataOutputStream(cs.getOutputStream());
-
-            //Se le envía un mensaje al cliente usando su flujo de salida
-            salidaCliente.writeUTF("Petición recibida y aceptada");
-
-            //Se obtiene el flujo entrante desde el cliente
-            BufferedReader entrada = new BufferedReader(new InputStreamReader(cs.getInputStream()));
-
-            while((mensajeServidor = entrada.readLine()) != null) //Mientras haya mensajes desde el cliente
-            {
-                //Se muestra por pantalla el mensaje recibido
-                System.out.println(mensajeServidor);
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+ 
+            System.out.println("Server is listening on port " + port);
+ 
+            while (true) {
+                Socket socket = serverSocket.accept();
+ 
+                System.out.println("New client connected");
+ 
+                ObjectOutputStream salidaObjeto = new ObjectOutputStream(socket.getOutputStream());
+            	salidaObjeto.writeObject(ARBOL);
+            	System.out.println("objeto enviado");
             }
-
-            System.out.println("Fin de la conexión");
-
-            ss.close();//Se finaliza la conexión con el cliente
+ 
+        } catch (IOException ex) {
+            System.out.println("Server exception: " + ex.getMessage());
+            ex.printStackTrace();
         }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
+            
+
+            
+            //salidaCliente = new DataOutputStream(cs.getOutputStream());
+            
+
     }
-}
+
+            //salidaCliente = new DataOutputStream(cs.getOutputStream());
+            
+
+    }

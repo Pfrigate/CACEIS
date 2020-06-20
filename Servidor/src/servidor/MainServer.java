@@ -10,19 +10,23 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTree;
+import javax.swing.tree.TreeModel;
 
 /**
  *
  * @author daniel
  */
 public class MainServer extends JFrame{
-    public MainServer(){
+    public MainServer() throws IOException{
     super("MI INTERFAZ CON JFRAME...");
 //-- CONFIGURAMOS LA VENTANA
     JPanel panelArbol=new JPanel();
-    //panelArbol.
     JTree jTree1=new JTree();
-    jTree1.setModel(new FileSystemModel(new File("/")));
+    TreeModel modelo=new FileSystemModel(new File("/CACEI"));
+    jTree1.setModel(modelo);
+    System.out.println(""+modelo);
+    //panelArbol.
+    
     panelArbol.add(jTree1);
     panelArbol.setSize(200, 400);
     add(panelArbol);
@@ -30,10 +34,14 @@ public class MainServer extends JFrame{
 
 
 //-- LE DAMOS UN TAMAÑO A LA VENTANA
-this.setSize(600,400);
+    this.setSize(600,400);
  
 //-- HACEMOS QUE LA VENTANA SE CIERRE POR DEFAULT
-this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setVisible(true);
+    Servidor serv = new Servidor();
+    serv.setModelo(modelo);
+    serv.startServer();
 
 }
  
@@ -42,11 +50,10 @@ public static void main(String[] ARGS) throws IOException{
 
 //-- HACEMOS QUE SE INICIALIZE NUESTRA VENTANA JFRAME
 MainServer MI_INTERFAZ = new MainServer();
-Servidor serv = new Servidor();
-serv.startServer();
+
  
 //-- HACEMOS QUE NUESTRA VENTANA SE VISIBLE
-MI_INTERFAZ.setVisible(true);
+
     
    
 }
