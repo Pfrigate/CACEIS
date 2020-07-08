@@ -13,14 +13,13 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import javax.swing.JTree;
-import javax.swing.tree.TreeModel;
+
 
 
 public class Cliente extends Conexion
 {
-    TreeModel arbol;
-    public TreeModel getModelo(){
+    SistemaFile arbol;
+    public SistemaFile getModelo(){
         return arbol;
     }
       
@@ -32,9 +31,11 @@ public class Cliente extends Conexion
         {
             //Flujo de datos hacia el servidor
             entradaObjeto=new ObjectInputStream(cs.getInputStream());
-            
+            System.out.println("recibiendo objeto");
             //salidaServidor = new DataOutputStream(cs.getOutputStream());
-            arbol=(TreeModel)entradaObjeto.readObject();
+            
+            arbol=(SistemaFile)
+                    entradaObjeto.readObject();
             
             
             //Se enviarán dos mensajes
@@ -44,7 +45,7 @@ public class Cliente extends Conexion
 //                salidaServidor.writeUTF("Este es el mensaje número " + (i+1) + "\n");
 //            }
 
-            cs.close();//Fin de la conexión
+           cs.close();//Fin de la conexión
 
         }
         catch (Exception e)

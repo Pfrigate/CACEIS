@@ -23,17 +23,17 @@ import javax.swing.tree.TreeModel;
 
 public class Servidor{
     int port=6969;
-    TreeModel ARBOL;
+    SistemaFile ARBOL;
     public Servidor() {
     
     } //Se usa el constructor para servidor de Conexion
-    public void setModelo(TreeModel a1){
+    public void setModelo(SistemaFile a1){
         ARBOL=a1;
     }
-    public TreeModel getModelo(TreeModel a1){
-       return ARBOL;
-    }
-        
+//    public TreeModel getModelo(TreeModel a1){
+//       return ARBOL;
+//    }
+//        
     public void startServer()//Método para iniciar el servidor
     {
         try (ServerSocket serverSocket = new ServerSocket(port)) {

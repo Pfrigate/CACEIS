@@ -18,13 +18,19 @@ import javax.swing.tree.TreeModel;
  */
 public class MainServer extends JFrame{
     public MainServer() throws IOException{
-    super("MI INTERFAZ CON JFRAME...");
+    super("CASEI SERVER");
 //-- CONFIGURAMOS LA VENTANA
     JPanel panelArbol=new JPanel();
     JTree jTree1=new JTree();
+    //TreeModel modelo = new FileTreeModel(new File(System.getProperty("user.dir")));
+    SistemaFile p1=new SistemaFile("/AUTOEVALUACION");
+    
+    
+    
+    
     TreeModel modelo=new FileSystemModel(new File("/CACEI"));
     jTree1.setModel(modelo);
-    System.out.println(""+modelo);
+    //System.out.println(""+modelo);
     //panelArbol.
     
     panelArbol.add(jTree1);
@@ -40,7 +46,7 @@ public class MainServer extends JFrame{
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
     Servidor serv = new Servidor();
-    serv.setModelo(modelo);
+    serv.setModelo(p1);
     serv.startServer();
 
 }

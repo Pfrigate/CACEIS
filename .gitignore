@@ -26,3 +26,5 @@ hs_err_pid*
 /JavaApplication5/nbproject/private/
 /Servidor/build/
 /Cliente/build/
+/Cliente/dist/
+/Servidor/dist/

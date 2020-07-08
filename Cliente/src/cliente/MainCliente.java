@@ -26,10 +26,10 @@ public class MainCliente extends JFrame{
     Cliente cli = new Cliente();
     cli.startClient();
     //panelArbol.
-    JTree jTree1=new JTree();
-    jTree1.setModel(cli.getModelo());
-    System.out.println(""+cli.arbol);
-    panelArbol.add(jTree1);
+    //JTree jTree1=new JTree();
+    //jTree1.setModel(cli.getModelo());
+    //System.out.println(""+cli.arbol);
+    //panelArbol.add(jTree1);
     panelArbol.setSize(200, 400);
     add(panelArbol);
 // LE PONEMOS UN TITULO
